@@ -17,9 +17,21 @@
         .todo-text {
             font-weight: bold;
         }
+        .completed {
+            text-decoration: line-through;
+            color: green;
+        }
     </style>
 </head>
-<body>
+<body class="bg-dark-subtle">
+
+<?php
+
+/** @var TYPE_NAME $todos */
+
+?>
+
+
 <div class="container">
     <div class="row d-flex justify-content-center">
         <div class="todo-body my-5 p-3">
@@ -32,31 +44,32 @@
                     <input type="text" class="form-control" placeholder="Recipient's username"
                            aria-label="Recipient's username" aria-describedby="button-addon2"
                            name="title"
+                           required
                     >
                     <input type="datetime-local" class="form-control" placeholder="Recipient's username"
                            aria-label="Recipient's username" aria-describedby="button-addon2"
                            name="due_date"
+                           required
                     >
                     <button class="btn btn-primary" type="submit" id="button-addon2">Add</button>
                 </div>
             </form>
             <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    An item
-                    <button class="btn btn-outline-success">Done</button>
+                <?php
+                foreach ($todos as $todo) {
+                    $isCompleted = $todo['status'] == 'completed' ? 'completed' : '';
+                    echo '
+                        <li class="' . $isCompleted . ' list-group-item d-flex justify-content-between align-items-center">
+                    ' . $todo["title"] . '
+                    <div>
+                        <a href="" class="btn btn-outline-success">In progress</a>
+                    <a href="/complete?id=' . $todo["id"] .'" class="btn btn-outline-success">Complete</a> 
+                    </div>
                 </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    An item
-                    <button class="btn btn-outline-success">Done</button>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    An item
-                    <button class="btn btn-outline-success">Done</button>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    An item
-                    <button class="btn btn-outline-success">Done</button>
-                </li>
+                    ';
+                }
+
+                ?>
             </ul>
         </div>
     </div>
