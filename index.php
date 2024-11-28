@@ -25,7 +25,17 @@ if ($uri == '/') {
         header('Location: /');
         exit();
     }
-} else{
+}elseif ($uri == '/in-progress') {
+    if (!empty($_GET['id'])) {
+        $todo->inProgress($_GET['id']);
+        header('Location: /');
+    }
+}elseif ($uri == '/pending') {
+    if (!empty($_GET['id'])) {
+        $todo->pending($_GET['id']);
+        header('Location: /');
+    }
+}  else{
     echo $uri . " Bu sahifa topilmadi!";
 }
 
