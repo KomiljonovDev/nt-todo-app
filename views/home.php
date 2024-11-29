@@ -36,7 +36,7 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aperiam autem eveniet illum ipsa, nihil
                 numquam officiis pariatur placeat quae quasi recusandae repellat similique tempora tenetur ut vel veniam
                 veritatis.</p>
-            <form method="POST" action="/store">
+            <form method="POST" action="/todos">
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="Recipient's username"
                            aria-label="Recipient's username" aria-describedby="button-addon2"

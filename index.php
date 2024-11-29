@@ -1,53 +1,45 @@
 <?php
-
-$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-
 require 'src/Todo.php';
-
 require 'helpers.php';
+require 'src/Router.php';
 
+$router = new Router();
 $todo = new Todo();
 
-if ($uri == '/') {
-    $todos = $todo->get();
-    view('home', [
-        'todos'=>$todos
-    ]);
-} elseif ($uri == '/store') {
+$router->get('/', function () {
+    echo '<a href="/todos">Todos</a>';
+});
+
+$router->get('/todos', function () use ($todo) {
+    $todos = $todo->getAllTodos();
+    view('home', ['todos' => $todos]);
+});
+$router->post('/todos', function () use ($todo) {
     if (!empty($_POST['title']) && !empty($_POST['due_date'])) {
         $todo->store($_POST['title'], $_POST['due_date']);
-        header('Location: /');
-        exit();
+        header('Location: /todos');
     }
-}elseif ($uri == '/complete') {
+});
+
+$router->get('/complete', function () use ($todo) {
     if (!empty($_GET['id'])) {
         $todo->complete($_GET['id']);
-        header('Location: /');
+        header('Location: /todos');
         exit();
     }
-}elseif ($uri == '/in-progress') {
+});
+$router->get('/in-progress', function () use ($todo) {
     if (!empty($_GET['id'])) {
         $todo->inProgress($_GET['id']);
-        header('Location: /');
+        header('Location: /todos');
     }
-}elseif ($uri == '/pending') {
+});
+$router->get('/pending', function () use ($todo) {
     if (!empty($_GET['id'])) {
         $todo->pending($_GET['id']);
-        header('Location: /');
+        header('Location: /todos');
     }
-}  else{
-    echo $uri . " Bu sahifa topilmadi!";
-}
-
-
-//$name = "Abdulaziz";
-//function myFunc () {
-//global $name;
-//    echo $name;
-//}
-//
-//
-//myFunc();
+});
 
 
 
