@@ -6,13 +6,18 @@ require 'src/Router.php';
 $router = new Router();
 $todo = new Todo();
 
+
 $router->get('/', function () {
-    echo '<a href="/todos">Todos</a>';
+    view('home');
+});
+
+$router->get('/todos/{id}/edit', function ($todoId) {
+    echo 'Edit the task: ' . $todoId;
 });
 
 $router->get('/todos', function () use ($todo) {
     $todos = $todo->getAllTodos();
-    view('home', ['todos' => $todos]);
+    view('todos', ['todos' => $todos]);
 });
 $router->post('/todos', function () use ($todo) {
     if (!empty($_POST['title']) && !empty($_POST['due_date'])) {
@@ -28,11 +33,9 @@ $router->get('/complete', function () use ($todo) {
         exit();
     }
 });
-$router->get('/in-progress', function () use ($todo) {
-    if (!empty($_GET['id'])) {
-        $todo->inProgress($_GET['id']);
-        header('Location: /todos');
-    }
+$router->get('/in-progress/{id}', function ($todoId) use ($todo) {
+    $todo->inProgress($todoId);
+    header('Location: /todos');
 });
 $router->get('/pending', function () use ($todo) {
     if (!empty($_GET['id'])) {

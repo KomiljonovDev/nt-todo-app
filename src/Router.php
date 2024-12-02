@@ -4,10 +4,20 @@ class Router {
     public function __construct () {
         $this->currentRoute = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     }
+    public function getResource () {
+        if (isset(explode("/", $this->currentRoute)[2])) {
+            $resourceId = (int)explode("/", $this->currentRoute)[2];
+            return $resourceId ? $resourceId : false;
+        }
+        return false;
+    }
+
     public function get ($route,$callback) {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $resourceId = $this->getResource();
+            $route = str_replace('{id}', $resourceId, $route);
             if ($route == $this->currentRoute) {
-                $callback();
+                $callback($resourceId);
                 exit();
             }
         }
