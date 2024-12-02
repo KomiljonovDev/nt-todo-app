@@ -44,6 +44,16 @@ $router->get('/pending', function () use ($todo) {
     }
 });
 
+/*
+ * TODO
+ *  1. Add getResource function in Router
+ *  2. Refactor the get function in Router
+ *  3. Change the todos.php
+ *  4. Change routes to resources
+ */
+
+
+
 
 
 
