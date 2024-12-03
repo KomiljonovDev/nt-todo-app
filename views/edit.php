@@ -36,18 +36,19 @@
     <form>
         <div class="form-group">
             <label for="taskName" class="form-label">Task Name</label>
-            <input type="text" id="taskName" class="form-control" placeholder="Enter task name" value="Buy groceries">
+            <input type="text" id="taskName" class="form-control" placeholder="Enter task name" value="<?= $todo['title'] ?>">
         </div>
         <div class="form-group">
             <label for="taskStatus" class="form-label">Status</label>
             <select id="taskStatus" class="form-select">
-                <option value="Pending" selected>Pending</option>
-                <option value="Completed">Completed</option>
+                <option value="Completed" <?= $todo['status'] == 'completed' ? 'selected' : ''?>>Completed</option>
+                <option value="Pending" <?= $todo['status'] == 'pending' ? 'selected' : ''?>>Pending</option>
+                <option value="in_progress" <?= $todo['status'] == 'in_progress' ? 'selected' : ''?>>In-progress</option>
             </select>
         </div>
         <div class="form-group">
             <label for="taskDueDate" class="form-label">Due Date</label>
-            <input type="date" id="taskDueDate" class="form-control" value="2024-12-12">
+            <input type="datetime-local" id="taskDueDate" class="form-control" value="<?= $todo['due_date'] ?>">
         </div>
         <div class="btn-actions">
             <button type="submit" class="btn btn-primary">Save Changes</button>

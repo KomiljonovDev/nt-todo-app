@@ -22,6 +22,7 @@
             text-decoration: line-through;
             color: green;
         }
+
         .in_progress {
             text-decoration: underline;
             color: orange;
@@ -56,37 +57,46 @@
                 /** @var TYPE_NAME $todos */
 
                 foreach ($todos as $todo) {
-                    if ($todo['status'] == 'completed') {
-                        echo '
+                    echo '
                                 <li class="' . $todo['status'] . ' list-group-item d-flex justify-content-between align-items-center">
                             ' . $todo["title"] . '
                             <div>
-                                <a href="/todos/' . $todo["id"] . '/in-progress" class="btn btn-outline-primary">In progress</a>
-                            <a href="/todos/' . $todo["id"] . '/pending" class="btn btn-outline-success">Pending</a> 
+                                <a href="/todos/' . $todo["id"] . '/edit" class="btn btn-outline-primary">Edit</a>
+                            <a href="/todos/' . $todo["id"] . '/delete" class="btn btn-outline-danger">Delete</a> 
                             </div>
                         </li>
                             ';
-                    } elseif ($todo['status'] == 'pending') {
-                        echo '
-                                <li class="' . $todo['status'] . ' list-group-item d-flex justify-content-between align-items-center">
-                            ' . $todo["title"] . '
-                            <div>
-                                <a href="/todos/' . $todo["id"] . '/in-progress" class="btn btn-outline-primary">In progress</a>
-                            <a href="/todos/' . $todo["id"] . '/complete" class="btn btn-outline-success">Complete</a> 
-                            </div>
-                        </li>
-                            ';
-                    } else {
-                        echo '
-                                <li class="' . $todo['status'] . ' list-group-item d-flex justify-content-between align-items-center">
-                            ' . $todo["title"] . '
-                            <div>
-                                <a href="/todos/' . $todo["id"] . '/pending" class="btn btn-outline-warning">Pending</a>
-                            <a href="/todos/' . $todo["id"] . '/complete" class="btn btn-outline-success">Complete</a> 
-                            </div>
-                        </li>
-                            ';
-                    }
+//                    if ($todo['status'] == 'completed') {
+//                        echo '
+//                                <li class="' . $todo['status'] . ' list-group-item d-flex justify-content-between align-items-center">
+//                            ' . $todo["title"] . '
+//                            <div>
+//                                <a href="/todos/' . $todo["id"] . '/in-progress" class="btn btn-outline-primary">In progress</a>
+//                            <a href="/todos/' . $todo["id"] . '/pending" class="btn btn-outline-success">Pending</a>
+//                            </div>
+//                        </li>
+//                            ';
+//                    } elseif ($todo['status'] == 'pending') {
+//                        echo '
+//                                <li class="' . $todo['status'] . ' list-group-item d-flex justify-content-between align-items-center">
+//                            ' . $todo["title"] . '
+//                            <div>
+//                                <a href="/todos/' . $todo["id"] . '/in-progress" class="btn btn-outline-primary">In progress</a>
+//                            <a href="/todos/' . $todo["id"] . '/complete" class="btn btn-outline-success">Complete</a>
+//                            </div>
+//                        </li>
+//                            ';
+//                    } else {
+//                        echo '
+//                                <li class="' . $todo['status'] . ' list-group-item d-flex justify-content-between align-items-center">
+//                            ' . $todo["title"] . '
+//                            <div>
+//                                <a href="/todos/' . $todo["id"] . '/pending" class="btn btn-outline-warning">Pending</a>
+//                            <a href="/todos/' . $todo["id"] . '/complete" class="btn btn-outline-success">Complete</a>
+//                            </div>
+//                        </li>
+//                            ';
+//                    }
                 }
 
                 ?>
