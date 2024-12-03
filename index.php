@@ -10,6 +10,9 @@ $todo = new Todo();
 $router->get('/', function () {
     view('home');
 });
+$router->get('/edit', function () {
+    view('edit');
+});
 
 $router->get('/todos/{id}/edit', function ($todoId) {
     echo 'Edit the task: ' . $todoId;
@@ -26,22 +29,18 @@ $router->post('/todos', function () use ($todo) {
     }
 });
 
-$router->get('/complete', function () use ($todo) {
-    if (!empty($_GET['id'])) {
-        $todo->complete($_GET['id']);
-        header('Location: /todos');
-        exit();
-    }
+$router->get('/todos/{id}/complete', function ($todoId) use ($todo) {
+    $todo->complete($todoId);
+    header('Location: /todos');
+    exit();
 });
-$router->get('/in-progress/{id}', function ($todoId) use ($todo) {
+$router->get('/todos/{id}/in-progress', function ($todoId) use ($todo) {
     $todo->inProgress($todoId);
     header('Location: /todos');
 });
-$router->get('/pending', function () use ($todo) {
-    if (!empty($_GET['id'])) {
-        $todo->pending($_GET['id']);
-        header('Location: /todos');
-    }
+$router->get('/todos/{id}/pending', function ($todoId) use ($todo) {
+    $todo->pending($todoId);
+    header('Location: /todos');
 });
 
 /*
