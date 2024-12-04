@@ -61,7 +61,7 @@
                                 <li class="' . $todo['status'] . ' list-group-item d-flex justify-content-between align-items-center">
                             ' . $todo["title"] . '
                             <div>
-                                <a href="/todos/' . $todo["id"] . '/edit" class="btn btn-outline-primary">Edit</a>
+                                <a href="/todos/' . $todo["id"] . '/update" class="btn btn-outline-primary">Edit</a>
                             <a href="/todos/' . $todo["id"] . '/delete" class="btn btn-outline-danger">Delete</a> 
                             </div>
                         </li>
