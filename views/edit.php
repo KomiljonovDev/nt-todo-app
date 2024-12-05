@@ -1,36 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Task</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
-        .edit-container {
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .edit-header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .btn-actions {
-            display: flex;
-            justify-content: space-between;
-        }
-    </style>
-</head>
-<body>
+<?php
+require 'views/components/header.php';
+?>
 <div class="edit-container">
     <h2 class="edit-header">Edit Task</h2>
     <form method="POST" action="/todos/<?= $todo['id'] ?>/update">
@@ -57,5 +27,6 @@
         </div>
     </form>
 </div>
-</body>
-</html>
+<?php
+require 'views/components/footer.php';
+?>
