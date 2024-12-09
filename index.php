@@ -19,31 +19,9 @@ $router->put('/todos/{id}/update', fn ($todoId) => require 'controllers/updateTo
 
 $router->get('/todos/{id}/update', fn ($todoId) => require 'controllers/editTodoController.php');
 
-$router->post('/todos', function () use ($todo) {
-    if (!empty($_POST['title']) && !empty($_POST['due_date'])) {
-        $todo->store($_POST['title'], $_POST['due_date']);
-        redirect('/todos');
-    }
-});
+$router->post('/todos', fn ()=> require 'controllers/storeTodoController.php');
 
-$router->get('/todos/{id}/delete', function ($todoId) use($todo){
-    $todo->destroy($todoId);
-    redirect('/todos');
-});
-
-
-
-
-
-
-/*
- * TODO
- *  1. Add getResource function in Router
- *  2. Refactor the get function in Router
- *  3. Change the todos.php
- *  4. Change routes to resources
- */
-
+$router->get('/todos/{id}/delete', fn ($todoId)=> require 'controllers/destroyTodoController.php');
 
 
 
