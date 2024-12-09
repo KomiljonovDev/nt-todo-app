@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\DB;
 class Todo {
     public $pdo;
 
