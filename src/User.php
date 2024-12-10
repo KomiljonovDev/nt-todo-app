@@ -15,15 +15,22 @@ class User {
         string $fullName,
         string $email,
         string $password
-    ): bool {
+    ): bool|int {
+        $select = $this->pdo->prepare("SELECT * FROM users WHERE email = :email");
+        $select->bindParam(":email", $email);
+        $select->execute();
+        if ($select->rowCount() > 0) {
+            return false;
+        }
         $query = "INSERT INTO users (full_name, email, password) 
         VALUES (:full_name, :email, :password)";
         $stmt = $this->pdo->prepare($query);
-        return $stmt->execute([
+        $stmt->execute([
             ':full_name' => $fullName,
             ':email' => $email,
             ':password' => $password
         ]);
+        return $this->pdo->lastInsertId();
     }
     public function login (string $email, string $password): bool|array {
         $query = "SELECT * FROM users WHERE email = :email AND password = :password";
