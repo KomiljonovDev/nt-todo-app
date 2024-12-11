@@ -14,9 +14,8 @@ $router->get('/register', fn () => view('register'));
 $router->post('/register', fn () => require 'controllers/storeUserController.php');
 
 
-
-
 $router->get('/login', fn () => view('login'));
+$router->post('/login', fn () => require 'controllers/loginUserController.php');
 $router->get('/', fn () => view('home'));
 
 $router->get('/todos', fn ()=> require 'controllers/getTodosController.php');
@@ -38,10 +37,10 @@ $router->get('/todos/{id}/delete', fn ($todoId)=> require 'controllers/destroyTo
 
 /*
  * TODO
- *  1. Add login,register page
- *  2. Add user class for users table
- *  3. Add register, login method into User class
- *  4. Implement the register method
+ *  1. Add getUserById method in User class
+ *  2. Change storeUserController
+ *  3. Add login controller and login route
+ *  5. Change navbar page
  */
 
 
