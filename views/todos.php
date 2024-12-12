@@ -11,8 +11,7 @@ require 'views/components/navbar.php';
                 veritatis.</p>
             <form method="POST" action="/todos">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Recipient's username"
-                           aria-label="Recipient's username" aria-describedby="button-addon2"
+                    <input type="text" class="form-control" placeholder="Title"
                            name="title"
                            required
                     >
@@ -38,37 +37,6 @@ require 'views/components/navbar.php';
                             </div>
                         </li>
                             ';
-//                    if ($todo['status'] == 'completed') {
-//                        echo '
-//                                <li class="' . $todo['status'] . ' list-group-item d-flex justify-content-between align-items-center">
-//                            ' . $todo["title"] . '
-//                            <div>
-//                                <a href="/todos/' . $todo["id"] . '/in-progress" class="btn btn-outline-primary">In progress</a>
-//                            <a href="/todos/' . $todo["id"] . '/pending" class="btn btn-outline-success">Pending</a>
-//                            </div>
-//                        </li>
-//                            ';
-//                    } elseif ($todo['status'] == 'pending') {
-//                        echo '
-//                                <li class="' . $todo['status'] . ' list-group-item d-flex justify-content-between align-items-center">
-//                            ' . $todo["title"] . '
-//                            <div>
-//                                <a href="/todos/' . $todo["id"] . '/in-progress" class="btn btn-outline-primary">In progress</a>
-//                            <a href="/todos/' . $todo["id"] . '/complete" class="btn btn-outline-success">Complete</a>
-//                            </div>
-//                        </li>
-//                            ';
-//                    } else {
-//                        echo '
-//                                <li class="' . $todo['status'] . ' list-group-item d-flex justify-content-between align-items-center">
-//                            ' . $todo["title"] . '
-//                            <div>
-//                                <a href="/todos/' . $todo["id"] . '/pending" class="btn btn-outline-warning">Pending</a>
-//                            <a href="/todos/' . $todo["id"] . '/complete" class="btn btn-outline-success">Complete</a>
-//                            </div>
-//                        </li>
-//                            ';
-//                    }
                 }
 
                 ?>

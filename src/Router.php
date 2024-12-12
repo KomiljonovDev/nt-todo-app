@@ -12,7 +12,10 @@ class Router {
         }
         return false;
     }
-
+    /*
+     * FIXME
+     *  1. Make as static the methods
+     */
     public function get ($route,$callback) {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $resourceId = $this->getResource();

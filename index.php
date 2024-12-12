@@ -16,6 +16,7 @@ $router->post('/register', fn () => require 'controllers/storeUserController.php
 
 $router->get('/login', fn () => view('login'));
 $router->post('/login', fn () => require 'controllers/loginUserController.php');
+$router->get('/logout', fn () => require 'controllers/logoutUserController.php');
 $router->get('/', fn () => view('home'));
 
 $router->get('/todos', fn ()=> require 'controllers/getTodosController.php');
