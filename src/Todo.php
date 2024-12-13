@@ -2,6 +2,8 @@
 
 namespace App;
 
+use PDO;
+
 class Todo {
     public $pdo;
 
@@ -14,20 +16,14 @@ class Todo {
         $query = "INSERT INTO todos(title, status, due_date, created_at, updated_at, user_id) 
                 VALUES (:title, 'pending', :due_date, NOW(), NOW(), :userId)
         ";
-        return $this->pdo->prepare($query)->execute([
-            ":title" => $title,
-            ":due_date" => $dueDate,
-            ':userId' => $userId
-        ]);
+        return $this->pdo->prepare($query)->execute([":title" => $title, ":due_date" => $dueDate, ':userId' => $userId]);
     }
 
     public function getAllTodos (int $userId) {
         $query = "SELECT * FROM todos where user_id=:user_id";
         $stmt = $this->pdo->prepare($query);
-        $stmt->execute([
-            ":user_id" => $userId
-        ]);
-        return $stmt->fetchAll();
+        $stmt->execute([":user_id" => $userId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function destroy (int $id): bool {
@@ -39,7 +35,7 @@ class Todo {
         $query = "SELECT * FROM todos WHERE id=:id";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([":id" => $id]);
-        return $stmt->fetch();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public function update (int $id, string $title, string $status, string $dueDate) {
