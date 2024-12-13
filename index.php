@@ -5,7 +5,6 @@ require 'bootstrap.php';
 use App\Todo;
 use App\Router;
 
-require 'helpers.php';
 
 $router = new Router();
 $todo = new Todo();

@@ -1,48 +1,74 @@
 <?php
+
 namespace App;
+
 class Router {
     public $currentRoute;
     public function __construct () {
         $this->currentRoute = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     }
-    public function getResource () {
-        if (isset(explode("/", $this->currentRoute)[2])) {
-            $resourceId = (int)explode("/", $this->currentRoute)[2];
-            return $resourceId ? $resourceId : false;
+
+    public function getResource ($route) {
+        $resourceIndex = mb_stripos($route, '{id}');
+        if (!$resourceIndex){
+            return false;
         }
-        return false;
+        $resourceValue = substr($this->currentRoute, $resourceIndex);
+        if($limit = mb_stripos($resourceValue, '/')){
+            return substr($resourceValue, 0, $limit);
+        }
+        return $resourceValue ?: false;
     }
+
     /*
      * FIXME
      *  1. Make as static the methods
      */
-    public function get ($route,$callback) {
+    public function get ($route, $callback) {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $resourceId = $this->getResource();
-            $route = str_replace('{id}', $resourceId, $route);
+            $resourceValue = $this->getResource($route);
+            if ($resourceValue){
+                $resourceRoute = str_replace('{id}', $resourceValue, $route);
+                if ($resourceRoute == $this->currentRoute) {
+                    $callback($resourceValue);
+                    exit();
+                }
+            }
             if ($route == $this->currentRoute) {
-                $callback($resourceId);
+                $callback();
                 exit();
             }
         }
     }
-    public function post ($route,$callback) {
+    public function post ($route, $callback) {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $resourceId = $this->getResource();
-            $route = str_replace('{id}', $resourceId, $route);
+            $resourceValue = $this->getResource($route);
+            if ($resourceValue){
+                $resourceRoute = str_replace('{id}', $resourceValue, $route);
+                if ($resourceRoute == $this->currentRoute) {
+                    $callback($resourceValue);
+                    exit();
+                }
+            }
             if ($route == $this->currentRoute) {
-                $callback($resourceId);
+                $callback();
                 exit();
             }
         }
     }
-    public function put ($route,$callback) {
+    public function put ($route, $callback) {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if (isset($_POST['_method']) && $_POST['_method'] == 'PUT') {
-                $resourceId = $this->getResource();
-                $route = str_replace('{id}', $resourceId, $route);
+            if (isset($_POST['_method']) && $_POST['_method'] == 'PUT'){
+                $resourceValue = $this->getResource($route);
+                if ($resourceValue){
+                    $resourceRoute = str_replace('{id}', $resourceValue, $route);
+                    if ($resourceRoute == $this->currentRoute) {
+                        $callback($resourceValue);
+                        exit();
+                    }
+                }
                 if ($route == $this->currentRoute) {
-                    $callback($resourceId);
+                    $callback();
                     exit();
                 }
             }
