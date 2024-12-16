@@ -13,6 +13,27 @@ $router->get('/api/todos', function () use ($todo){
 $router->get('/api/todos/{id}', function ($todoId) use ($todo){
     apiResponse($todo->getTodo($todoId));
 });
+$router->post('/api/todos', function () use ($todo){
+    $todo->store($_POST['title'], $_POST['dueDate'], 2);
+    apiResponse([
+        'ok'=>true,
+        'message'=>'Todo created successfully'
+    ]);
+});
+$router->put('/api/todos/{id}', function ($todoId) use ($todo){
+    $todo->update($todoId, $_POST['title'], $_POST['status'], $_POST['dueDate']);
+    apiResponse([
+        'ok'=>true,
+        'message'=>'Todo update successfully'
+    ]);
+});
+$router->delete('/api/todos/{id}', function ($todoId) use($todo){
+    $todo->destroy($todoId);
+    apiResponse([
+        'ok'=>true,
+        'message'=>'Todo delete successfully'
+    ]);
+});
 
 
 

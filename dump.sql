@@ -29,8 +29,11 @@ CREATE TABLE `todos` (
   `due_date` datetime DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `user_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `todos_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +42,7 @@ CREATE TABLE `todos` (
 
 LOCK TABLES `todos` WRITE;
 /*!40000 ALTER TABLE `todos` DISABLE KEYS */;
-INSERT INTO `todos` VALUES (5,'Task 1','in_progress','2024-12-05 18:00:00','2024-11-26 19:06:07','2024-12-06 19:40:08'),(8,'Task 3','pending','2024-11-26 18:00:00','2024-11-26 19:08:14','2024-11-26 19:08:14'),(9,'Task 4','pending','2024-11-26 12:01:00','2024-11-26 19:08:52','2024-11-26 19:08:52'),(10,'Task 5','in_progress','2024-11-26 12:21:00','2024-11-26 19:09:12','2024-11-26 19:09:12'),(11,'Task 6','completed','2024-11-26 12:02:00','2024-11-26 19:16:09','2024-12-02 16:09:23'),(12,'Task 7','pending','2024-11-26 12:02:00','2024-11-26 19:18:39','2024-11-26 19:18:39'),(15,'Todo From Route: todos','pending','2024-11-29 12:02:00','2024-11-29 17:41:48','2024-11-29 17:41:48'),(16,'Todo From Route: todos 2','in_progress','2024-11-29 12:02:00','2024-11-29 17:43:29','2024-11-29 17:43:29'),(17,'Todo From Route: todos 3','completed','2024-11-29 12:02:00','2024-11-29 17:46:05','2024-12-02 16:09:48'),(18,' Todo From Route: todos 4','pending','2024-11-29 12:12:00','2024-11-29 17:46:46','2024-11-29 17:46:46'),(19,' Todo From Route: todos 5','in_progress','2024-11-29 12:02:00','2024-11-29 19:50:57','2024-11-29 19:50:57'),(20,' Todo From Route: todos 6','pending','2024-11-29 12:02:00','2024-11-29 19:51:17','2024-11-29 19:51:17'),(21,'Test todo from Controller','completed','2024-12-10 12:12:00','2024-12-09 15:19:05','2024-12-09 15:19:19');
+INSERT INTO `todos` VALUES (10,'Task 5','in_progress','2024-11-26 12:21:00','2024-11-26 19:09:12','2024-11-26 19:09:12',4),(11,'Task 6','completed','2024-11-26 12:02:00','2024-11-26 19:16:09','2024-12-02 16:09:23',NULL),(12,'Task 7','pending','2024-11-26 12:02:00','2024-11-26 19:18:39','2024-11-26 19:18:39',NULL),(15,'Todo From Route: todos','pending','2024-11-29 12:02:00','2024-11-29 17:41:48','2024-11-29 17:41:48',NULL),(16,'Todo From Route: todos 2','in_progress','2024-11-29 12:02:00','2024-11-29 17:43:29','2024-11-29 17:43:29',NULL),(17,'Todo From Route: todos 3','completed','2024-11-29 12:02:00','2024-11-29 17:46:05','2024-12-02 16:09:48',NULL),(18,' Todo From Route: todos 4','pending','2024-11-29 12:12:00','2024-11-29 17:46:46','2024-11-29 17:46:46',NULL),(19,' Todo From Route: todos 5','in_progress','2024-11-29 12:02:00','2024-11-29 19:50:57','2024-11-29 19:50:57',NULL),(20,' Todo From Route: todos 6','pending','2024-11-29 12:02:00','2024-11-29 19:51:17','2024-11-29 19:51:17',NULL),(21,'Test todo from Controller','completed','2024-12-10 12:12:00','2024-12-09 15:19:05','2024-12-09 15:19:19',NULL),(23,'Task 8','pending','2024-12-14 12:12:00','2024-12-13 16:07:39','2024-12-13 16:07:39',2),(24,'Task 9','pending','2024-12-13 12:12:00','2024-12-13 18:44:12','2024-12-13 18:44:12',2),(25,'Task 10 update','in_progress','2024-12-13 12:01:00','2024-12-13 18:45:07','2024-12-13 18:46:30',2);
 /*!40000 ALTER TABLE `todos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,7 +60,7 @@ CREATE TABLE `users` (
   `password` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,6 +69,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'Avazbek Hasanov','avazbekh366@gmail.com','1234'),(2,'Abdullajon','admin@admin.com','1234'),(4,'Fazliddin','fazliddin@admin.com','1234'),(5,'Abdullajon','test@admin.com','1234'),(6,'Bobomurod','bobomurod@admin.com','1234'),(7,'Avazbek','avazbek@admin.com','1234');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -78,4 +82,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-09 17:39:51
+-- Dump completed on 2024-12-16 16:36:24

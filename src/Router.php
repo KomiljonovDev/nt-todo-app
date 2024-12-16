@@ -77,7 +77,22 @@ class Router {
             }
         }
     }
-
+    public function delete ($route, $callback) {
+        if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
+            $resourceValue = $this->getResource($route);
+            if ($resourceValue) {
+                $resourceRoute = str_replace('{id}', $resourceValue, $route);
+                if ($resourceRoute == $this->currentRoute) {
+                    $callback($resourceValue);
+                    exit();
+                }
+            }
+            if ($route == $this->currentRoute) {
+                $callback();
+                exit();
+            }
+        }
+    }
     public function isApiCall () {
         return mb_stripos($this->currentRoute, '/api') === 0;
     }
