@@ -93,7 +93,11 @@ class Router {
             }
         }
     }
-    public function isApiCall () {
+    public function isApiCall (): bool {
         return mb_stripos($this->currentRoute, '/api') === 0;
+    }
+
+    public function isTelegram (): bool {
+        return mb_stripos($this->currentRoute, '/telegram') === 0;
     }
 }

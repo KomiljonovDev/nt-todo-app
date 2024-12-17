@@ -2,7 +2,9 @@
     "require": {
         "vlucas/phpdotenv": "^5.6",
       "ext-pdo": "*",
-        "larapack/dd": "^1.1"
+        "larapack/dd": "^1.1",
+        "guzzlehttp/guzzle": "^7.0",
+      "ext-http": "*"
     },
     "autoload": {
         "psr-4": {

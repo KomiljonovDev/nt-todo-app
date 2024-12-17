@@ -21,6 +21,7 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/todos">To-do List</a></li>
                             <li><a class="dropdown-item" href="/todos"><?= $_SESSION['user']['full_name'] ?? '' ?></a></li>
+                            <li><a class="dropdown-item text-primary" href="https://t.me/nt3_todo_app_bot?start=<?= $_SESSION['user']['id']?>" target="_blank">Sync With Telegram</a></li>
                             <li><a class="dropdown-item text-danger" href="/logout">Logout</a></li>
                         </ul>
                     </li>
